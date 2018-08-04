@@ -62,16 +62,32 @@ Num|Action
 
 #### Done 
 Returns a boolean stating whether the game has finished.
+#### Results required
+To pass this challenge, our model must get an average score above 195 for 100 consecutive trials. 200 is the max score you can get in a game. After that, the game automatically closes. 
 
+### Background 
 
-### Steps that we will take
+### Steps that we will take for neuroevolution
 For neuroevolution, we once we have established a model, we can take the following steps - 
-* Create a population of model - multiple models with their own characteristics. In terms of DNN's, this would mean hyperparameters.
+* Create a population of model - multiple models with their own characteristics. In terms of DNN's, this would mean hyperparameters. This example's population will have randomly initialized weights.
 * Find the fittest - run tests on the model. The models total reward during the test is known as fitness. Fitness is a term coined by Darwin. It is a measure of the ability of an organism to reproduce and create new generations.
 * Select the fittest - keep the models that have the highest fitness (the highest rewards).
 * Make new generations - take the fittest models. Use their characteristics to create new models or in scientific terms, a new generation.
 * Mutations - randomly choose a model. Then randomly change something about it. In DNN's, this could be it's hyperparameters.
 * Repeat - repeat the steps above until you converge to a very accurate model. 
-If some of this didn't make sense, don't worry. There will be detailed explainations of every step below, along with coded examples. 
+If some of this didn't make sense, don't worry. There will be detailed explainations of every step below, along with coded examples. Note, we are not doing any learning of sorts. We are simply getting random weights and seeing whether they work well. Then, we improve on those weights till we converge to the ideal weights. 
 
 #### Creating a population
+I will keep a population size of 10. This means that I will have 10 seperate models that I will use. 
+
+    class Population:
+        def __init__(self):
+            self.weights = np.random.uniform(-1.0, 1.0, 4)
+            self.surviveSteps = 0
+            self.fitness = 0
+            self.lifeFitness = 0
+            self.lifeSteps = 0
+
+The population class creates an Agents, which is one of the models in the population. Each model will have a corresponding fitness value. Also, for transparency purposes, I we will collect extra data such as the number of steps the model survived in a game.
+
+
