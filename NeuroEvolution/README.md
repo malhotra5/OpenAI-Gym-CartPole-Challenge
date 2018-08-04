@@ -14,5 +14,12 @@ You will need the following modules installed for python -
 I have a tutorial for installing gym. This also includes other subsets of gym, such as the atari subset. The tutorial works for Windows too (especially Windows users who want atari games). To install the rest, use the following commands on the terminal - 
 
     pip install numpy 
+    pip install statistics
+    
+##  Running the program
+You can call the program on the command line or in IDLE. The program isn't very dynamic. A lot of the code is messy. After this tutorial, I will leave it up to you for further editing the program.
+
+## How it works
+Neuroevolution is now a popular tool in AI that seems to work very well. 
 
 
