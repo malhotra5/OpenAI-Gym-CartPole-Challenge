@@ -90,4 +90,10 @@ I will keep a population size of 10. This means that I will have 10 seperate mod
 
 The population class creates an Agents, which is one of the models in the population. Each model will have a corresponding fitness value. Also, for transparency purposes, I we will collect extra data such as the number of steps the model survived in a game.
 
-
+## Things to take away
+Neuroevolution is a great method for training accurate models in short amounts of time
+## Things to work on 
+This code only shows the basics of neuroevolution. Also, most of the time, you have to get lucky in order to get a model that generalizes well over any scenario for CartPole. A lot of the times, an Agent gets a good score during the evolutionary process. But, when you test it's results, it doesn't do so well anymore. There are solutions to this. You can increase mutations. Do more randomizations to some parts of breeding and mutations. Run the generations for longer even if the score requirement hsa been reached. I'll leave rest of the tinkering process to you.
+## Built with
+* Gym
+* Python3
