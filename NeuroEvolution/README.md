@@ -41,7 +41,7 @@ Gym is made by OpenAI for the development of reinforcement learning. To use gym,
         
 So, to make sense of what is going on, we are making random moves in the game right now. We choose a random action, and we perform it in the game. In doing so, we get a reward. The goal of the game is to make sure that the CartPole is upright, till we get a total reward of 200 in 100 consecutive games. Some information on whats going on is below.
 #### CartPole Structure
-![GitHub Logo](/Videos/cart.jpg)
+![GitHub Logo](/NeuroEvolution/Videos/cart.jpg)
 #### Observations 
 Observations is a list that will be used to optimize our model. We get an observation after every step.
 
