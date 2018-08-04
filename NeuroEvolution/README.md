@@ -35,13 +35,15 @@ Gym is made by OpenAI for the development of reinforcement learning. To use gym,
     
     if not done:
         env.render() #This is used to visualize the game
-        action = env.action_sample.sample() #This is to choose a random action that can be made in the game
+        action = env.action_sample.sample() #This gets a random action that can be made in the game
         observation, rewards, done, info = env.step(action) #This is to perform that action. It returns multiple values. Explained below
         
         
 So, to make sense of what is going on, we are making random moves in the game right now. We choose a random action, and we perform it in the game. In doing so, we get a reward. The goal of the game is to make sure that the CartPole is upright, till we get a total reward of 200 in 100 consecutive games. Some information on whats going on is below.
+#### CartPole Structure
+![GitHub Logo](/Videos/cart.jpg)
 #### Observations 
-Observations is a list that will be used to optimize our model.
+Observations is a list that will be used to optimize our model. We get an observation after every step.
 
 Num|Observation
 -------|--------
@@ -51,7 +53,7 @@ Num|Observation
 3|Pole Velocity at tip
 
 #### Actions
-Actions are a number specified. This number determines what the cart should do in the game.
+Actions are specified by a number. This number determines what the cart should do in the game.
 
 Num|Action
 -------|----------
@@ -59,13 +61,17 @@ Num|Action
 1|Move right
 
 #### Done 
-Returns a boolean stating whether the game has finished
+Returns a boolean stating whether the game has finished.
 
 
 ### Steps that we will take
 For neuroevolution, we once we have established a model, we can take the following steps - 
 * Create a population of model - multiple models with their own characteristics. In terms of DNN's, this would mean hyperparameters.
-* Find the fittest - run tests on the model. You should get back a reward for how well each model does. This reward is known as fitness. Fitness is a term coined by Darwin. It is a measure of the ability of an organism to reproduce and create new generations.
+* Find the fittest - run tests on the model. The models total reward during the test is known as fitness. Fitness is a term coined by Darwin. It is a measure of the ability of an organism to reproduce and create new generations.
 * Select the fittest - keep the models that have the highest fitness (the highest rewards).
-* 
+* Make new generations - take the fittest models. Use their characteristics to create new models or in scientific terms, a new generation.
+* Mutations - randomly choose a model. Then randomly change something about it. In DNN's, this could be it's hyperparameters.
+* Repeat - repeat the steps above until you converge to a very accurate model. 
+If some of this didn't make sense, don't worry. There will be detailed explainations of every step below, along with coded examples. 
 
+#### Creating a population
