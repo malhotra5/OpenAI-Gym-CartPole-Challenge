@@ -181,7 +181,7 @@ bestWeights, bestScore, bestSteps = geneticEvolution.runEvolution()
 
 
 print(bestWeights, bestScore)
-5
+
 
 
 env = gym.make(envName)
