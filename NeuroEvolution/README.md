@@ -142,7 +142,7 @@ Now that we have a list of the fittest Agents from using the method above, we ca
 
             numChange = random.randrange(0,len(par1Weights)) #Choose how many weight values you want to change for the new Agent
 
-            #Loop over the number of weights you want to change (this is also the number of weights the new Agent will inherit from it's                                                                                                                             #   parents)
+            #Loop over the number of weights you want to change (this is also the number of weights the new Agent will inherit from it's parents)
             for i in range(numChange):
                 #Get a random index for a weight
                 randomSpot = random.randrange(0, len(par1Weights))
@@ -157,7 +157,7 @@ Now that we have a list of the fittest Agents from using the method above, we ca
             #Add the new Agent to the population 
             pop.append(newAgent)
 
-        #Return the new population. The size of the new poplation will equal to the older generations' size. This is to make sure that                                                                                             #every generation has equal number of Agents
+        #Return the new population. The size of the new poplation will equal to the older generations' size. This is to make sure that every generation has equal number of Agents
         return pop
 
 When breeding, we will only breed the number of Agents that are required to fill in a certain population size. We generally try to keep the population size the same across all generation. Higher population sizes usually help, as there is a higher chance of having a lot of diversity between Agents.
