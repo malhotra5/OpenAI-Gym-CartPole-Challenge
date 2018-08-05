@@ -164,6 +164,26 @@ When breeding, we will only breed the number of Agents that are required to fill
 
 Our objective is to initialize an Agent with random weights. Then replace some of it's weights from it's parents' weights. We choose random parents from the fittest population. Then we choose a random number of weights to replace from the new Agent. You might realize that this isn't very realistic. In the real world, all traits are inherited from one of the parents. In this case, we are only replacing a few of the weights. I did this to create more variation within a population. You can tinker with this if you like. 
 
+#### Mutations
+    #This mutates the incoming generation. A new generation is formed after mutations.
+    def mutate(self, pop):
+        num1 = random.randrange(0, len(pop)) #Get a random number
+        num2 = random.randrange(0, len(pop)) #Get a random number
+
+        mutateAgent1 = pop[num1] #Use the random number above to get a random model from the population. This model will be mutated
+        mutateAgent2 = pop[num2] #Use the random number above to get a random model from the population. This model will be mutated
+
+        index1 = random.randrange(len(mutateAgent1.weights)) #Get a random number 
+        index2 = random.randrange(len(mutateAgent2.weights))
+        
+        mutateAgent1.weights[index1] = random.uniform(-1.0, 1.0) #Using the random number above, choose a value of the weights. Re-assign that weight to a random number 
+        mutateAgent2.weights[index2] = random.uniform(-1.0, 1.0)
+
+This piece of code performs mutations on a population. This happens after the new generation has been bred. This piece of code particularly chooses two random Agents. Then it performs it randomly chooses a weight value and assigns it to a random weight. Mutations help in creating diversity. Also, by including mutations, we can help neuroevolution converge to different weights. Sometimes, these values can outperform weights learnt from standard nerual nets. 
+
+#### Repeat
+We keep doing the steps above and keep making new generations until the population can perform very well. In this case, I stopped the algorithm once any one Agent in the algorithm got a fitness score of 200. You can change this. Maybe you can keep running the generations until all the Agents in the population can get a fitness score of 200. 
+
 ## Things to take away
 Neuroevolution is a great method for training accurate models in short amounts of time. It can be used in the fields of Deep Learning. 
 ## Things to work on 
