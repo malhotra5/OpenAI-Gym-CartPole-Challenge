@@ -73,8 +73,8 @@ Evolution occurs through multiple factors. The first thing to know is that evolu
 In order for evolution to take place, you need biological diversity. You need many different traits in a population to maximize the chance that at least some organisms will breed the next generation. Some of this diversity comes from mutations. Mutations can cause a new trait to form that can help in survival or not. 
 
 For more information about this, visit these 2 sources - \
-https://evolution.berkeley.edu/evolibrary/article/evo_toc_01 Goes in depth about evolution \
-https://www.yourgenome.org/facts/what-is-evolution Very introductory about evolution 
+https://evolution.berkeley.edu/evolibrary/article/evo_toc_01: Goes in depth about evolution \
+https://www.yourgenome.org/facts/what-is-evolution: Very introductory about evolution 
 
 I won't be able to cover every aspect of evolution and neither will the sources above. But, hopefully you now have a general idea of how evolution works.
 
