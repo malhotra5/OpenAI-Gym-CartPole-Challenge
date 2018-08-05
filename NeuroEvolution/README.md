@@ -69,9 +69,9 @@ To pass this challenge, our model must get an average score above 195 for 100 co
 Darwin was the pioneer of evolution. He created most of the theories that state how organisms evolove. It is neccessary to understand a little about how evolution takes place, before applying it to neuroevolution. \
 Evolution occurs through multiple factors. The first thing to know is that evolution takes place on populations, not individual organisms. A population is a group of animals that live together in a certain area. So, evolution requires a population. When a populatoin is large, there is competition for resources such as food and living space. As a result, only the organisms within a population, that can easily get access to resources can successfully breed. This is known as the survival of the fittest. Fitness is the ability of an organism to survive within it's habitat and reproduce. Animals with traits that are suited to their environment will have a higher fitness. Therefore, majority of the population will start to consist of the animals with similar traits which help obtain higher fitness levels. Animals with bad traits will die and won't produce any offspring. When there is an extreme change in a populations traits, the population is considered to have evolved. \
 In order for evolution to take place, you need biological diversity. You need many different traits in a population to maximize the chance that at least some organisms will breed the next generation. Some of this diversity comes from mutations. Mutations can cause a new trait to form that can help in survival or not. \
-For more information about this, visit these 2 sources - 
-https://evolution.berkeley.edu/evolibrary/article/evo_toc_01 Goes in depth about evolution
-https://www.yourgenome.org/facts/what-is-evolution Very introductory about evolution
+For more information about this, visit these 2 sources - \
+https://evolution.berkeley.edu/evolibrary/article/evo_toc_01 Goes in depth about evolution \
+https://www.yourgenome.org/facts/what-is-evolution Very introductory about evolution \
 I won't be able to cover every aspect of evolution and neither will the sources above. But, hopefully you now have a general idea of how evolution works.
 
 ### Steps that we will take for neuroevolution
