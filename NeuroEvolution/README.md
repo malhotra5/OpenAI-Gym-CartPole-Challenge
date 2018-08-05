@@ -66,20 +66,21 @@ Returns a boolean stating whether the game has finished.
 To pass this challenge, our model must get an average score above 195 for 100 consecutive trials. 200 is the max score you can get in a game. After that, the game automatically closes. 
 
 ### Background 
-Darwin was the pioneer of evolution. He created most of the theories that state how organisms evolove. It is neccessary to understand a little about how evolution takes place, before applying it to neuroevolution. \
+Darwin was the pioneer of evolution. He created most of the theories that state how organisms evolove. It is neccessary to understand a little about how evolution takes place, before applying it to neuroevolution. 
 
-Evolution occurs through multiple factors. The first thing to know is that evolution takes place on populations, not individual organisms. A population is a group of animals that live together in a certain area. So, evolution requires a population. When a populatoin is large, there is competition for resources such as food and living space. As a result, only the organisms within a population, that can easily get access to resources can successfully breed. This is known as the survival of the fittest. Fitness is the ability of an organism to survive within it's habitat and reproduce. Animals with traits that are suited to their environment will have a higher fitness. Therefore, majority of the population will start to consist of the animals with similar traits which help obtain higher fitness levels. Animals with bad traits will die and won't produce any offspring. When there is an extreme change in a populations traits, the population is considered to have evolved. \
+Evolution occurs through multiple factors. The first thing to know is that evolution takes place on populations, not individual organisms. A population is a group of animals that live together in a certain area. So, evolution requires a population. When a populatoin is large, there is competition for resources such as food and living space. As a result, only the organisms within a population, that can easily get access to resources can successfully breed. This is known as the survival of the fittest. Fitness is the ability of an organism to survive within it's habitat and reproduce. Animals with traits that are suited to their environment will have a higher fitness. Therefore, majority of the population will start to consist of the animals with similar traits which help obtain higher fitness levels. Animals with bad traits will die and won't produce any offspring. When there is an extreme change in a populations traits, the population is considered to have evolved. 
 
-In order for evolution to take place, you need biological diversity. You need many different traits in a population to maximize the chance that at least some organisms will breed the next generation. Some of this diversity comes from mutations. Mutations can cause a new trait to form that can help in survival or not. \
+In order for evolution to take place, you need biological diversity. You need many different traits in a population to maximize the chance that at least some organisms will breed the next generation. Some of this diversity comes from mutations. Mutations can cause a new trait to form that can help in survival or not. 
 
-For more information about this, visit these 2 sources - \
+For more information about this, visit these 2 sources - 
 https://evolution.berkeley.edu/evolibrary/article/evo_toc_01 Goes in depth about evolution \
-https://www.yourgenome.org/facts/what-is-evolution Very introductory about evolution \
+https://www.yourgenome.org/facts/what-is-evolution Very introductory about evolution 
+
 I won't be able to cover every aspect of evolution and neither will the sources above. But, hopefully you now have a general idea of how evolution works.
 
 ### Steps that we will take for neuroevolution
 For neuroevolution, we once we have established a model, we can take the following steps - 
-* Create a population of model - multiple models with their own characteristics. In terms of DNN's, this would mean hyperparameters. This example's population will have randomly initialized weights.
+* Create a population for models - multiple models with their own characteristics. In terms of DNN's, this would mean hyperparameters. This example's population will have randomly initialized weights.
 * Find the fittest - run tests on the model. The models total reward during the test is known as fitness. Fitness is a term coined by Darwin. It is a measure of the ability of an organism to reproduce and create new generations.
 * Select the fittest - keep the models that have the highest fitness (the highest rewards).
 * Make new generations - take the fittest models. Use their characteristics to create new models or in scientific terms, a new generation.
@@ -99,12 +100,76 @@ I will keep a population size of 10. This means that I will have 10 seperate mod
             self.lifeFitness = 0
             self.lifeSteps = 0
 
-The population class creates an Agents, which is one of the models in the population. Each model will have a corresponding fitness value. Also, for transparency purposes, I we will collect extra data such as the number of steps the model survived in a game.
+The population class creates an Agent, which is one of the models in the population. Each model will have a corresponding fitness value. Also, for transparency purposes, I we will collect extra data such as the number of steps the model survived in a game. Once a new generation has been created, the fitness and the number of survived steps will be reset. The variables lifeFitness and lifeSteps data of the Agent across all the generations it survives.
+#### Find the fittest
+    def getFittest(self, pop):
+        newPop = []
+        scores = []
+
+        #Get fitness scores for populations
+        scores, _ = self.getScoresAndSteps(pop)
+        
+        #Get agents top 2 fitness level weights    
+        newPop.append(pop[np.argmax(scores)])
+        pop.remove(pop[scores.index(max(scores))])
+        scores.remove(max(scores))
+        newPop.append(pop[np.argmax(scores)])
+        pop.remove(pop[scores.index(max(scores))])
+        scores.remove(max(scores))
+
+
+        #Choose one random agent from remaining population 
+
+        num = random.randrange(0,len(scores))
+        
+        newPop.append(pop[num])
+
+        #Return the fittest Agents
+        return newPop
+This method gets the top 2 fittest Agents in a population. They will be used later in order to breed the next generation. We will also select an extra Agent randomly from the group of Agents that didn't do so well. This is to replicate real life scenarios. In the real world, the organisms that don't do well can still survive, but not breed. Since we are going to apply mutations later on, it could also be worth keeping an extra organism. If it happens to undergo mutations, it could potentially start to out perform the other Agents in the population. 
+#### Breeding the new generation
+Now that we have a list of the fittest Agents from using the method above, we can breed a new generation. We will use the fittest Agents to create a new generation by using the method below. 
+    
+    def breed(self, pop):
+        #This creates new Agents. The loop makes sure that we are only filling in new agents until the max population size is reached
+        for i in range(self.size - len(pop)):
+            newAgent = Population() #Create a new agent
+            randParent1 = pop[random.randrange(0,len(pop))] #Get a random parents from the fittest population
+            randParent2 = pop[random.randrange(0, len(pop))] #Get another random parent
+
+            par1Weights = randParent1.weights #Get parents' weights
+            par2Weights = randParent2.weights
+
+            numChange = random.randrange(0,len(par1Weights)) #Choose how many weight values you want to change for the new Agent
+
+            #Loop over the number of weights you want to change (this is also the number of weights the new Agent will inherit from it's                                                                                                                             #   parents)
+            for i in range(numChange):
+                #Get a random index for a weight
+                randomSpot = random.randrange(0, len(par1Weights))
+                #Get a random number to decide which parents' weights to use
+                randomPar = random.randrange(0,2)
+                #From a random parents, get a random weight value 
+                if randomPar == 0:
+                    newAgent.weights[randomSpot] = par1Weights[randomSpot]
+                else:
+                    newAgent.weights[randomSpot] = par2Weights[randomSpot]
+
+            #Add the new Agent to the population 
+            pop.append(newAgent)
+
+        #Return the new population. The size of the new poplation will equal to the older generations' size. This is to make sure that                                                                                             #every generation has equal number of Agents
+        return pop
+
+When breeding, we will only breed the number of Agents that are required to fill in a certain population size. We generally try to keep the population size the same across all generation. Higher population sizes usually help, as there is a higher chance of having a lot of diversity between Agents.
+
+Our objective is to initialize an Agent with random weights. Then replace some of it's weights from it's parents' weights. We choose random parents from the fittest population. Then we choose a random number of weights to replace from the new Agent. You might realize that this isn't very realistic. In the real world, all traits are inherited from one of the parents. In this case, we are only replacing a few of the weights. I did this to create more variation within a population. You can tinker with this if you like. 
 
 ## Things to take away
 Neuroevolution is a great method for training accurate models in short amounts of time. It can be used in the fields of Deep Learning. 
 ## Things to work on 
 This code only shows the basics of neuroevolution. Also, most of the time, you have to get lucky in order to get a model that generalizes well over any scenario for CartPole. A lot of the times, an Agent gets a good score during the evolutionary process. But, when you test it's results, it doesn't do so well anymore. There are solutions to this. You can increase mutations. Do more randomizations to some parts of breeding and mutations. Run the generations for longer even if the score requirement hsa been reached. I'll leave rest of the tinkering process to you.
+
+**NOTE -** I have more or less explained what neuroevolution is by using the code. The orignal code however has a lot of pre-processing and helper methods. To fully understand this, I recommend following the code in this repository. I have heavily commented the code for make things a little transparent. 
 ## Built with
 * Gym
 * Python3
