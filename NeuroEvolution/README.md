@@ -187,10 +187,11 @@ We keep doing the steps above and keep making new generations until the populati
 ## Results
 Results from making random moves|Results from using neuroevolution
 --------------------------------|---------------------------------
-![GitHub Logo](/images/Failure.mp4)|![GitHub Logo](/images/Weight 1 test2.mp4)
+![GitHub Logo](/NeuroEvolution/Videos/testCase1.gif)|![GitHub Logo](/NeuroEvolution/Videos/testCase2.gif)
+
 
 You can see that the one with the random moves died almost immediately. It got a fitness score of about 16. The second one that used neuroevolution got a score of 200. You can tell that the model clearly knows what it's doing. Here is another example that performed extraordinarily well.
-![GitHub Logo](/images/Weight 1 test3.mp4)
+![GitHub Logo](/NeuroEvolution/Videos/testCase3.gif)
 ## Things to take away
 Neuroevolution is a great method for training accurate models in short amounts of time. It can be used in the fields of Deep Learning. 
 ## Things to work on 
