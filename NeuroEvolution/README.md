@@ -196,7 +196,7 @@ You can see that the one with the random moves died almost immediately. It got a
 ## Things to take away
 Neuroevolution is a great method for training accurate models in short amounts of time. It can be used in the fields of Deep Learning. 
 ## Things to work on 
-This code only shows the basics of neuroevolution. Also, most of the time, you have to get lucky in order to get a model that generalizes well over any scenario for CartPole. A lot of the times, an Agent gets a good score during the evolutionary process. But, when you test it's results, it doesn't do so well anymore. There are solutions to this. You can increase mutations. Do more randomizations to some parts of breeding and mutations. Run the generations for longer even if the score requirement hsa been reached. I'll leave rest of the tinkering process to you.
+This code only shows the basics of neuroevolution. Also, most of the time, you have to get lucky in order to get a model that generalizes well over any scenario for CartPole. A lot of the times, an Agent gets a good score during the evolutionary process. But, when you test it's results, it doesn't do so well anymore. There are solutions to this. You can increase mutations. Do more randomizations to some parts of breeding and mutations. Run the generations for longer even if the score requirement has been reached. I'll leave rest of the tinkering process to you.
 
 **NOTE -** I have more or less explained what neuroevolution is by using the code. The orignal code however has a lot of pre-processing and helper methods. To fully understand this, I recommend following the code in this repository. I have heavily commented the code for make things a little transparent. 
 ## Built with
