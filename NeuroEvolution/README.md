@@ -24,7 +24,7 @@ Neuroevolution is now a popular tool in AI that seems to work very well. Compare
 
 ### Things to know about gym
 Gym is made by OpenAI for the development of reinforcement learning. To use gym, you can do the following commands - 
-
+```python
     import gym #Imports the module
     
     env = gym.make("CartPole-v0") #This specifies the game we want to make
@@ -37,7 +37,7 @@ Gym is made by OpenAI for the development of reinforcement learning. To use gym,
         env.render() #This is used to visualize the game
         action = env.action_sample.sample() #This gets a random action that can be made in the game
         observation, rewards, done, info = env.step(action) #This is to perform that action. It returns multiple values. Explained below
-        
+```
         
 So, to make sense of what is going on, we are making random moves in the game right now. We choose a random action, and we perform it in the game. In doing so, we get a reward. The goal of the game is to make sure that the CartPole is upright, till we get a total reward of 200 in 100 consecutive games. Some information on whats going on is below.
 #### CartPole Structure
@@ -91,7 +91,7 @@ If some of this didn't make sense, don't worry. There will be detailed explainat
 #### Creating a population
 I will keep a population size of 10. This means that I will have 10 seperate models that I will use. 
 **Note - I will sometimes, refer to models as Agents. Agents are models that are part of a population. A population is a collection of many models. Please pardon me if I ever interchange Agents with models.**
-
+```python
     class Population:
         def __init__(self):
             self.weights = np.random.uniform(-1.0, 1.0, 4)
@@ -99,10 +99,11 @@ I will keep a population size of 10. This means that I will have 10 seperate mod
             self.fitness = 0
             self.lifeFitness = 0
             self.lifeSteps = 0
-
+```
 The population class creates an Agent, which is one of the models in the population. Each model will have a corresponding fitness value. Also, for transparency purposes, I we will collect extra data such as the number of steps the model survived in a game. Once a new generation has been created, the fitness and the number of survived steps will be reset. The variables lifeFitness and lifeSteps data of the Agent across all the generations it survives.
 #### Find the fittest
-    def getFittest(self, pop):
+ ```python
+ def getFittest(self, pop):
         newPop = []
         scores = []
 
@@ -126,10 +127,12 @@ The population class creates an Agent, which is one of the models in the populat
 
         #Return the fittest Agents
         return newPop
+```
 This method gets the top 2 fittest Agents in a population. They will be used later in order to breed the next generation. We will also select an extra Agent randomly from the group of Agents that didn't do so well. This is to replicate real life scenarios. In the real world, the organisms that don't do well can still survive, but not breed. Since we are going to apply mutations later on, it could also be worth keeping an extra organism. If it happens to undergo mutations, it could potentially start to out perform the other Agents in the population. 
 #### Breeding the new generation
 Now that we have a list of the fittest Agents from using the method above, we can breed a new generation. We will use the fittest Agents to create a new generation by using the method below. 
-    
+
+```python
     def breed(self, pop):
         #This creates new Agents. The loop makes sure that we are only filling in new agents until the max population size is reached
         for i in range(self.size - len(pop)):
@@ -159,12 +162,14 @@ Now that we have a list of the fittest Agents from using the method above, we ca
 
         #Return the new population. The size of the new poplation will equal to the older generations' size. This is to make sure that every generation has equal number of Agents
         return pop
+```
 
 When breeding, we will only breed the number of Agents that are required to fill in a certain population size. We generally try to keep the population size the same across all generation. Higher population sizes usually help, as there is a higher chance of having a lot of diversity between Agents.
 
 Our objective is to initialize an Agent with random weights. Then replace some of it's weights from it's parents' weights. We choose random parents from the fittest population. Then we choose a random number of weights to replace from the new Agent. You might realize that this isn't very realistic. In the real world, all traits are inherited from one of the parents. In this case, we are only replacing a few of the weights. I did this to create more variation within a population. You can tinker with this if you like. 
 
 #### Mutations
+```python
     #This mutates the incoming generation. A new generation is formed after mutations.
     def mutate(self, pop):
         num1 = random.randrange(0, len(pop)) #Get a random number
@@ -178,7 +183,7 @@ Our objective is to initialize an Agent with random weights. Then replace some o
         
         mutateAgent1.weights[index1] = random.uniform(-1.0, 1.0) #Using the random number above, choose a value of the weights. Re-assign that weight to a random number 
         mutateAgent2.weights[index2] = random.uniform(-1.0, 1.0)
-
+```
 This piece of code performs mutations on a population. This happens after the new generation has been bred. This piece of code particularly chooses two random Agents. Then it performs it randomly chooses a weight value and assigns it to a random weight. Mutations help in creating diversity. Also, by including mutations, we can help neuroevolution converge to different weights. Sometimes, these values can outperform weights learnt from standard nerual nets. 
 
 #### Repeat
