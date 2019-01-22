@@ -4,6 +4,7 @@ Multiple ways to approach getting very good results in CartPole environment.
 [NeuroEvolution](https://github.com/malhotra5/OpenAI-Gym-CartPole-Challenge/tree/master/NeuroEvolution "Go to tutorial")
 
 ## Approaches to come
+* FNN (Feedforward neural network)
 * CNN (Convolution Neural Networks)
 * RL (Reinforcement Learning)
   * Q-Learning 
@@ -12,3 +13,14 @@ Multiple ways to approach getting very good results in CartPole environment.
   * DDPG (Deep Deterministic Policy Gradients)
 * RNN (Recurrent Nueral Network)
 * MNN (Modular Neural Network)
+## What to take away 
+* The different kinds of state of the art model available
+* How different models work 
+* Comparisions between models, how to choose which model is best
+* 
+
+## Made in 
+* Python3
+* Numpy
+* Tensorflow
+* Keras 
