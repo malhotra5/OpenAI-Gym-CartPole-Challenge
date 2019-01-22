@@ -12,7 +12,7 @@ You will need the following modules installed for python -
 
 ### Installing
 I have a tutorial for installing gym. This also includes other subsets of gym, such as the atari subset. The tutorial works for Windows too (especially Windows users who want atari games). To install the rest, use the following commands on the terminal - 
-```bash
+```shell
     pip install numpy 
     pip install statistics
 ```
