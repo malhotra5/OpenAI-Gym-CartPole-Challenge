@@ -43,27 +43,8 @@ def streamTrain(model):
 	model.save("weights.hdf5")
 
 
-def testResults(modelPath):
-	observation = env.reset()
-	trainedModel = model()
-	trainedModel.load_weights(modelPath)
 
-	scoreTracker = 0
-
-	for i in range(200):
-	  env.render()
-	  action = trainedModel.predict(np.array([observation]))
-	  action = np.argmax(action)
-
-	  observation, reward, done, info = env.step(action)
-
-	  scoreTracker = scoreTracker + reward
-	  if done:
-	  	observation = env.reset()
-	  	print("Simulation performed with a score of {}".format(scoreTracker))
-	  	scoreTracker = 0
 
 
 streamTrain(model())
 
-testResults("weights.hdf5")
