@@ -31,8 +31,7 @@ def trainFromPreviousModel(prevModel, nowModel):
 	nowModel.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 	
 	observation = env.reset()
-	for _ in range(1000):
-	  env.render()
+	for _ in range(10000):
 	  action = prevModel.predict(np.array([observation]))
 	  action = np.argmax(action)
 

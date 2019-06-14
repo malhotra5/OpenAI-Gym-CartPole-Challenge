@@ -11,7 +11,7 @@ import numpy as np
 env = gym.make("CartPole-v1")
 
 
-def model():
+def newModel():
 	model = Sequential()
 	model.add(Dense(16, input_shape=(4,), activation="relu"))
 	model.add(Dense(12, activation="relu"))
@@ -19,14 +19,22 @@ def model():
 	model.add(Dense(2, activation="sigmoid"))
 	return model
 
-def testResults(modelPath):
+def previousModel():
+	model = Sequential()
+	model.add(Dense(12, input_shape=(4,), activation="relu"))
+	model.add(Dense(8, activation="relu"))
+	model.add(Dense(2, activation="sigmoid"))
+
+	return model
+
+def testResults(modelPath, modelArch):
 	observation = env.reset()
-	trainedModel = model()
+	trainedModel = modelArch
 	trainedModel.load_weights(modelPath)
 
 	scoreTracker = 0
 
-	for i in range(200):
+	for i in range(1000):
 	  env.render()
 	  action = trainedModel.predict(np.array([observation]))
 	  action = np.argmax(action)
@@ -41,4 +49,4 @@ def testResults(modelPath):
 
 
 
-testResults("newModel.hdf5")
+testResults("newModel.hdf5", newModel())
