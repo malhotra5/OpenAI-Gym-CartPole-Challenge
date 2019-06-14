@@ -5,6 +5,7 @@ Multiple ways to approach getting very good results in CartPole environment.
 
 [NeuroEvolution](https://github.com/malhotra5/OpenAI-Gym-CartPole-Challenge/tree/master/NeuroEvolution "Go to tutorial")
 
+[Model to Model](https://github.com/malhotra5/OpenAI-Gym-CartPole-Challenge/tree/master/ModelToModel "Go to tutorial")
 ## Approaches to come
 * CNN (Convolution Neural Networks)
 * RL (Reinforcement Learning)
@@ -18,7 +19,7 @@ Multiple ways to approach getting very good results in CartPole environment.
 * The different kinds of state of the art model available
 * How different models work 
 * Comparisions between models, how to choose which model is best
-* 
+
 
 ## Made in 
 * Python3
