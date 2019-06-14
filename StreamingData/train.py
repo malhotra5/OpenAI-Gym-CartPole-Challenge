@@ -23,12 +23,15 @@ def model():
 def streamTrain(model):
 	model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 	observation = env.reset()
-	for _ in range(1000):
-	  env.render()
+	for _ in range(30000):
+	  # env.render()
 	  action = env.action_space.sample() # your agent here (this takes random actions)
 	 
+	  act = [0,0]
+	  act[action] = 1
 
-	  model.fit(np.array([observation]), to_categorical(np.array([action])), epochs=1, batch_size=1, verbose=0)
+
+	  model.fit(np.array([observation]), np.array([act]), epochs=1, batch_size=1, verbose=0)
 
 	  observation, reward, done, info = env.step(action)
 
@@ -40,4 +43,27 @@ def streamTrain(model):
 	model.save("weights.hdf5")
 
 
+def testResults(modelPath):
+	observation = env.reset()
+	trainedModel = model()
+	trainedModel.load_weights(modelPath)
+
+	scoreTracker = 0
+
+	for i in range(200):
+	  env.render()
+	  action = trainedModel.predict(np.array([observation]))
+	  action = np.argmax(action)
+
+	  observation, reward, done, info = env.step(action)
+
+	  scoreTracker = scoreTracker + reward
+	  if done:
+	  	observation = env.reset()
+	  	print("Simulation performed with a score of {}".format(scoreTracker))
+	  	scoreTracker = 0
+
+
 streamTrain(model())
+
+testResults("weights.hdf5")
