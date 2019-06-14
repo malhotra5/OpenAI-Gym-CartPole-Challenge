@@ -64,9 +64,9 @@ def formatData(X):
 	for i in X:
 		for j in i:
 			finalData.append(j)
+	
 	return np.array(finalData)
 
-	return np.array(finalData)
 def model():
 	model = Sequential()
 	model.add(Dense(12, input_shape=(4,), activation="relu"))
@@ -113,10 +113,9 @@ def testResults(modelPath):
 	  observation, reward, done, info = env.step(action)
 
 	  scoreTracker = scoreTracker + reward
-	  print(scoreTracker)
 	  if done:
 	  	observation = env.reset()
-	  	print(scoreTracker)
+	  	print("Simulation performed with a score of {}".format(scoreTracker))
 	  	scoreTracker = 0
 
 
